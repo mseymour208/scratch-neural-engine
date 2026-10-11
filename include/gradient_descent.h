@@ -2,6 +2,7 @@
 #define GRADIENT_DESCENT_H
 
 #include "layer.h"
+#include "math_utils.h"
 
 class gradient_descent {
 

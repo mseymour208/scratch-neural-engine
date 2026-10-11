@@ -6,6 +6,7 @@
 
 using namespace std;
 
+
 class layer {
 
 private:
@@ -17,6 +18,7 @@ public:
     matrix forward_pass(const matrix& input_A);
     matrix backward_pass(const matrix& dA);
 
+    friend class gradient_descent;
 };
 
 
