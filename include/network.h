@@ -15,6 +15,7 @@ public:
     void add_layer(int n_in, int n_out);
 
     void train(vector<matrix>& X, vector<matrix>& Y, int epochs);
+    matrix predict(const matrix& m);
 
 };
 

@@ -35,10 +35,17 @@ void network::train(vector<matrix>& X, vector<matrix>& Y, int epochs) {
             }
         }
 
-        
 
     }
 
+}
+
+matrix network::predict(const matrix& m) {
+    matrix A = m;
+    for (int i = 0; i < layers.size(); i++) {
+        A = layers[i].forward_pass(A);
+    }
+    return A;
 }
 
 
