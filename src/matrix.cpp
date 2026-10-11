@@ -15,8 +15,6 @@ matrix::matrix(int r, int c, int n_in, int n_out) : vec(r*c), row(r), col(c) {
     for(int i = 0; i < r*c; i++) {
         vec[i] = dist(gen);
     }
-
-
 }
 
 // Matrix addition
