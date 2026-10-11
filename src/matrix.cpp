@@ -1,5 +1,8 @@
 #include "matrix.h"
 
+
+matrix::matrix() : row(0), col(0) {}
+
 matrix::matrix(int r, int c) : vec(r*c), row(r), col(c) {}
 
 matrix::matrix(int r, int c, int n_in, int n_out) : vec(r*c), row(r), col(c) {

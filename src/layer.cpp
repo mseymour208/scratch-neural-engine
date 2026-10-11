@@ -1,7 +1,7 @@
 #include "layer.h"
 
 
-layer::layer(int n_in, int n_out) : W(n_out, n_in, n_in, n_out) b(n_out, 1) {}
+layer::layer(int n_in, int n_out) : W(n_out, n_in, n_in, n_out), b(n_out, 1) {}
 
 matrix layer::forward_pass(const matrix& input_A) {
     A_prev = input_A;

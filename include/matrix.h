@@ -26,6 +26,7 @@ private:
 public:
     // Overload
     // addition, subtraction, scalar/dot product, transposition, random, printing
+    matrix();
     matrix(int r, int c); // 0's initialize (bias)
     matrix(int r, int c, int n_in, int n_out); // random initialize (weights)
 
