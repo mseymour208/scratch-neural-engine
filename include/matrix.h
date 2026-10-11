@@ -44,6 +44,8 @@ public:
     friend matrix math_utils::sigmoid_deriv(const matrix& m);
     friend double math_utils::BCE_cost(const matrix& Y, const matrix& A);
     friend matrix math_utils::BCE_deriv(const matrix& Y, const matrix& A);
+    
+    friend matrix operator<<(ostream& os, const matrix& m);
 
 };
 

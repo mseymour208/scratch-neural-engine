@@ -83,3 +83,11 @@ matrix matrix::operator!() const {
     return z;
 }
 
+
+matrix operator<<(ostream& os, const matrix& m) {
+    for (int i = 0; i < m.row; i++) {
+        for (int j = 0; j < m.col; j++) {
+            os << m.vec[i] << endl;
+        }
+    }
+}
