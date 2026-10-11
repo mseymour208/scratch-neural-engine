@@ -6,6 +6,16 @@
 #include <random>
 using namespace std;
 
+
+class matrix;
+namespace math_utils {
+    matrix sigmoid(const matrix& m);
+    matrix sigmoid_deriv(const matrix& m);
+    double BCE_cost(const matrix& Y, const matrix& A);
+    matrix BCE_deriv(const matrix& Y, const matrix& A);
+}
+
+
 class matrix {
 
 private:
