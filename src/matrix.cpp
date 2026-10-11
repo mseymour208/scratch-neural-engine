@@ -84,10 +84,12 @@ matrix matrix::operator!() const {
 }
 
 
-matrix operator<<(ostream& os, const matrix& m) {
+ostream& operator<<(ostream& os, const matrix& m) {
     for (int i = 0; i < m.row; i++) {
         for (int j = 0; j < m.col; j++) {
-            os << m.vec[i] << endl;
+            os << m.vec[i] << " ";
         }
+        os << "\n";
     }
+    return os;
 }
