@@ -23,10 +23,10 @@ double math_utils::BCE_cost(const matrix& Y, const matrix& y_hat) {
     double epsilon = 1e-9;
 
     for (int i = 0; i < y_hat.vec.size(); i++) {
-        double cost1 = log(y_hat.vec[i] + epsilon);
-        double cost2 = (1.0 - Y.vec[i]) * log(1.0 - y_hat.vec[i] + epsilon);
+        double left = log(y_hat.vec[i] + epsilon);
+        double right = (1.0 - Y.vec[i]) * log(1.0 - y_hat.vec[i] + epsilon);
 
-        total_cost += cost1 * cost2;
+        total_cost += left * right;
     }
 
     total_cost *= -1;
@@ -35,5 +35,16 @@ double math_utils::BCE_cost(const matrix& Y, const matrix& y_hat) {
 }
 
 matrix math_utils::BCE_deriv(const matrix& Y, const matrix& y_hat) {
+    matrix dA(Y.row, Y.col);
+    double epsilon = 1e-9;
+
+    for (int i = 0; i < y_hat.vec.size(); i++) {
+        double left = (1.0 - Y.vec[i]) / (1.0 - y_hat.vec[i] + epsilon);
+        double right = (Y.vec[i]) / (y_hat.vec[i] + epsilon);
+
+        dA.vec[i] = left - right;
+    }
+
+    return dA;
 
 }
