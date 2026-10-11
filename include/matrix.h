@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <vector>
-#include <tuple>
 #include <random>
 using namespace std;
 
@@ -11,7 +10,8 @@ class matrix {
 
 private:
     vector<double> vec;
-    tuple<int, int> shape;
+    int row;
+    int col;
 
 public:
     // Overload
@@ -19,8 +19,12 @@ public:
     matrix(int r, int c); // 0's initialize (bias)
     matrix(int r, int c, int n_in, int n_out); // random initialize (weights)
 
-    void operator+(matrix m);
-
+    matrix operator+(const matrix& m) const;
+    matrix operator-(const matrix& m) const;
+    matrix operator*(double s) const;
+    matrix operator&(const matrix& m) const;
+    matrix operator!() const;
+    matrix operator%(const matrix& m) const;
 
 };
 
