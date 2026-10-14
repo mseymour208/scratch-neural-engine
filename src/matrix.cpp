@@ -2,13 +2,13 @@
 
 
 matrix::matrix() : row(0), col(0) {}
-matrix::matrix(int r, int c) : vec(r*c), row(r), col(c) {}
+matrix::matrix(int r, int c) : vec(r*c, 0.0), row(r), col(c) {}
 matrix::matrix(int r, int c, const vector<double>& data) : vec(data), row(r), col(c) {}
 
 matrix::matrix(int r, int c, int n_in, int n_out) : vec(r*c), row(r), col(c) {
 
     // Xavier initialization
-    double limit = sqrt(6/(n_in + n_out));
+    double limit = sqrt(6.0/(n_in + n_out));
     
     random_device rd;
     mt19937 gen(rd());
@@ -87,7 +87,7 @@ matrix matrix::operator!() const {
 ostream& operator<<(ostream& os, const matrix& m) {
     for (int i = 0; i < m.row; i++) {
         for (int j = 0; j < m.col; j++) {
-            os << m.vec[i] << " ";
+            os << m.vec[i * m.col + j] << " ";
         }
         os << "\n";
     }

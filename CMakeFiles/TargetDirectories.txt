@@ -1,0 +1,3 @@
+C:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/CMakeFiles/neural_net.dir
+C:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/CMakeFiles/edit_cache.dir
+C:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/CMakeFiles/rebuild_cache.dir

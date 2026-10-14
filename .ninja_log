@@ -1,0 +1,15 @@
+# ninja log v7
+39	1824	8134669155221307	CMakeFiles/neural_net.dir/src/layer.cpp.obj	c211228bba3f611f
+59	1828	8134669155431562	CMakeFiles/neural_net.dir/src/gradient_descent.cpp.obj	4d936d0ae90e845a
+53	1849	8134669155388827	CMakeFiles/neural_net.dir/src/math_utils.cpp.obj	cb0b71fe483bf985
+1	1857	8134669154823175	CMakeFiles/neural_net.dir/src/main.cpp.obj	4ae1a4a957740dd5
+34	1878	8134669155204494	CMakeFiles/neural_net.dir/src/network.cpp.obj	f1e3e9ba4ee0075d
+30	472	8134672604484615	CMakeFiles/neural_net.dir/src/matrix.cpp.obj	3868b972ecaf6681
+474	590	8134672608932589	neural_net.exe	bd421fefbd8e8dc8
+29	810	8134678378122700	CMakeFiles/neural_net.dir/src/matrix.cpp.obj	3868b972ecaf6681
+811	991	8134678385963990	neural_net.exe	bd421fefbd8e8dc8
+32	1044	8134678526938730	CMakeFiles/neural_net.dir/src/layer.cpp.obj	c211228bba3f611f
+1046	1328	8134678537086477	neural_net.exe	bd421fefbd8e8dc8
+51	809	8134682183703766	CMakeFiles/neural_net.dir/src/layer.cpp.obj	c211228bba3f611f
+37	875	8134682183496715	CMakeFiles/neural_net.dir/src/matrix.cpp.obj	3868b972ecaf6681
+875	1118	8134682191904319	neural_net.exe	bd421fefbd8e8dc8

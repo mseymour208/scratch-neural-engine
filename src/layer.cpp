@@ -12,10 +12,10 @@ matrix layer::forward_pass(const matrix& input_A) {
 }
 
 matrix layer::backward_pass(const matrix& dA) {
-    matrix dZ = dA % math_utils::sigmoid_deriv(Z);
+    matrix dZ = dA % math_utils::sigmoid_deriv(A);
     dW = dZ & !A_prev;
 
-    matrix db = dZ;
+    db = dZ;
     matrix dA_prev = !W & dZ;
 
     return dA_prev;
