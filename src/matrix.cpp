@@ -93,3 +93,7 @@ ostream& operator<<(ostream& os, const matrix& m) {
     }
     return os;
 }
+
+double matrix::operator()(int r, int c) const {
+    return vec[r, c];
+}

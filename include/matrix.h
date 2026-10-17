@@ -15,6 +15,10 @@ namespace math_utils {
     matrix BCE_deriv(const matrix& Y, const matrix& A);
 }
 
+namespace data_utils {
+    void load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx);
+}
+
 
 class matrix {
 
@@ -37,8 +41,9 @@ public:
     matrix operator&(const matrix& m) const;
     matrix operator!() const;
     matrix operator%(const matrix& m) const;
+    double operator()(int r, int c) const;
 
-
+    friend void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx);
 
     friend matrix math_utils::sigmoid(const matrix& m);
     friend matrix math_utils::sigmoid_deriv(const matrix& m);
