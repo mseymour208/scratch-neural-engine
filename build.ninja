@@ -84,6 +84,14 @@ build CMakeFiles/neural_net.dir/src/math_utils.cpp.obj: CXX_COMPILER__neural_net
   OBJECT_FILE_DIR = CMakeFiles\neural_net.dir\src
   TARGET_SUPPORT_DIR = CMakeFiles\neural_net.dir
 
+build CMakeFiles/neural_net.dir/src/data_utils.cpp.obj: CXX_COMPILER__neural_net_unscanned_ C$:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/src/data_utils.cpp || cmake_object_order_depends_target_neural_net
+  DEP_FILE = CMakeFiles\neural_net.dir\src\data_utils.cpp.obj.d
+  FLAGS = -std=gnu++17
+  INCLUDES = -IC:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/include
+  OBJECT_DIR = CMakeFiles\neural_net.dir
+  OBJECT_FILE_DIR = CMakeFiles\neural_net.dir\src
+  TARGET_SUPPORT_DIR = CMakeFiles\neural_net.dir
+
 build CMakeFiles/neural_net.dir/src/gradient_descent.cpp.obj: CXX_COMPILER__neural_net_unscanned_ C$:/Users/Mikle/OneDrive/Desktop/scratch-neural-engine/src/gradient_descent.cpp || cmake_object_order_depends_target_neural_net
   DEP_FILE = CMakeFiles\neural_net.dir\src\gradient_descent.cpp.obj.d
   FLAGS = -std=gnu++17
@@ -100,7 +108,7 @@ build CMakeFiles/neural_net.dir/src/gradient_descent.cpp.obj: CXX_COMPILER__neur
 #############################################
 # Link the executable neural_net.exe
 
-build neural_net.exe: CXX_EXECUTABLE_LINKER__neural_net_ CMakeFiles/neural_net.dir/src/main.cpp.obj CMakeFiles/neural_net.dir/src/matrix.cpp.obj CMakeFiles/neural_net.dir/src/network.cpp.obj CMakeFiles/neural_net.dir/src/layer.cpp.obj CMakeFiles/neural_net.dir/src/math_utils.cpp.obj CMakeFiles/neural_net.dir/src/gradient_descent.cpp.obj
+build neural_net.exe: CXX_EXECUTABLE_LINKER__neural_net_ CMakeFiles/neural_net.dir/src/main.cpp.obj CMakeFiles/neural_net.dir/src/matrix.cpp.obj CMakeFiles/neural_net.dir/src/network.cpp.obj CMakeFiles/neural_net.dir/src/layer.cpp.obj CMakeFiles/neural_net.dir/src/math_utils.cpp.obj CMakeFiles/neural_net.dir/src/data_utils.cpp.obj CMakeFiles/neural_net.dir/src/gradient_descent.cpp.obj
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\neural_net.dir
   POST_BUILD = cd .

@@ -10,6 +10,7 @@ add_executable(neural_net
     src/network.cpp
     src/layer.cpp
     src/math_utils.cpp
+    src/data_utils.cpp
     src/gradient_descent.cpp
 )
 

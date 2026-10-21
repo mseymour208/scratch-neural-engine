@@ -10,8 +10,7 @@
         vector<matrix> Y;
 
         // Load data using breast cancer data set
-        data_utils::load_csv("C:\\Users\\Mikle\\OneDrive\\Desktop\\scratch-neural-engine\\breast+cancer+wisconsin+diagnostic.zip", X, Y, 1);
-
+        data_utils::load_csv("C:\\Users\\Mikle\\OneDrive\\Desktop\\scratch-neural-engine\\breast+cancer+wisconsin+diagnostic\\wdbc.data", X, Y, 1);
 
         // Creating network
 
@@ -19,7 +18,7 @@
         neural_net.add_layer(30, 16); // Hidden Layer
         neural_net.add_layer(16, 1); // Output Layer
 
-        neural_net.train(X, Y, 100);
+        neural_net.train(X, Y, 1000);
         int count = 0;
         for (int i = 0; i < X.size(); i++) {
             int temp = 0;
@@ -30,8 +29,8 @@
             if (temp == Y[i](0, 0)) {
                 count += 1;
             }
+            cout << (count * 100.0) / X.size() << endl;
         }
-        cout << (count * 100.0) / X.size();
 
 
     }

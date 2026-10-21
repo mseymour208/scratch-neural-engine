@@ -39,9 +39,10 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
             }
             current_col++;
         }
-
-        X.emplace_back(matrix(x_raw.size(), 1, x_raw));
-        Y.emplace_back(matrix(y_raw.size(), 1, y_raw));
+        if (x_raw.size() == 30 && y_raw.size() == 1) {
+            X.emplace_back(matrix(x_raw.size(), 1, x_raw));
+            Y.emplace_back(matrix(y_raw.size(), 1, y_raw));
+        }
     }
 
     vector<double> feature_max(30, -DBL_MAX);
@@ -66,5 +67,36 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
     }
 
 
-
 }
+
+
+void data_utils::train_test_split(vector<matrix>& X, vector<matrix>& Y, vector<matrix>& X_train, vector<matrix>& X_test,
+vector<matrix>& Y_train, vector<matrix>& Y_test) {
+
+    vector<int> indices(X.size());
+    for (int i = 0; i < X.size(); i++) {
+        indices.push_back(i);
+    }
+
+    random_device rd;
+    mt19937 gen(rd());
+
+    shuffle(indices.begin(), indices.end(), gen);
+    int split_idx = X.size() * 0.8;
+
+    int shuffled_idx = 0;
+    for (int i = 0; i < X.size(); i++) {
+        shuffled_idx = indices[i];
+        if (i < split_idx) {
+            X_train.push_back(X[shuffled_idx]);
+            Y_train.push_back(Y[shuffled_idx]);
+        } else {
+            X_test.push_back(X[shuffled_idx]);
+            Y_test.push_back(Y[shuffled_idx]);
+        }
+    }
+}
+
+
+
+
