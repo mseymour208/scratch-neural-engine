@@ -6,6 +6,7 @@
 #include <fstream>
 #include <sstream>
 #include <cfloat>
+#include <algorithm>
 
 #include "matrix.h"
 
