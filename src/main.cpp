@@ -12,7 +12,7 @@
         vector<matrix> X_train, X_test, Y_train, Y_test;
 
         // Load data using breast cancer data set
-        data_utils::load_csv("C:\\Users\\Mikle\\OneDrive\\Desktop\\scratch-neural-engine\\breast+cancer+wisconsin+diagnostic\\wdbc.data", X, Y, 1);
+        data_utils::load_csv("C:\\Users\\Mikle\\OneDrive\\Desktop\\scratch-neural-engine\\breast+cancer+wisconsin+diagnostic\\wdbc.data", X, Y, 1, false, 0);
         data_utils::train_test_split(X, Y, X_train, X_test, Y_train, Y_test);
 
         // Creating network
@@ -31,8 +31,9 @@
             if (temp == Y_test[i](0, 0)) {
                 count += 1;
             }
-            cout << (count * 100.0) / X_test.size() << endl;
         }
+
+        cout << (count * 100.0) / X_test.size() << endl;
 
 
     }

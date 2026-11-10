@@ -1,6 +1,7 @@
 #include "data_utils.h"
+#include <unordered_map>
 
-void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx) {
+void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx) {
     ifstream file(filepath);
 
     if (!file.is_open()) {
@@ -8,9 +9,15 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
         return;
     }
 
+    unordered_map<string, double> label_map;
+    double class_counter = 0;
+
     string row_string = "";
 
     // Iterate over rows
+    if (has_header) {
+        getline(file, row_string);
+    }
     while (getline(file, row_string)) {
         vector<double> y_raw;
         vector<double> x_raw;
@@ -22,50 +29,51 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
         // Iterate over columns
         while (getline(stream, cell_string, ',')) {
             if (current_col == label_idx) {
-                if (current_col == 1 && cell_string == "M")
-                y_raw.push_back(1.0);
 
-                else if (current_col == 1 && cell_string == "B")
-                y_raw.push_back(0.0);
+                if (label_map.find(cell_string) == label_map.end()) {
+                    label_map[cell_string] = class_counter;
+                    class_counter++;
+                } 
 
-                else
-                y_raw.push_back(stod(cell_string));
-            } 
-            else if (current_col == 0) {
+                y_raw.push_back(label_map[cell_string]);
+            }
+            else if (current_col == id_idx) {
                 current_col++;
                 continue;
             } else {
-                x_raw.push_back(stod(cell_string));
+                if (!cell_string.empty())
+                    x_raw.push_back(stod(cell_string));
             }
             current_col++;
         }
-        if (x_raw.size() == 30 && y_raw.size() == 1) {
+        if (x_raw.size() > 0) {
             X.emplace_back(matrix(x_raw.size(), 1, x_raw));
             Y.emplace_back(matrix(y_raw.size(), 1, y_raw));
         }
     }
 
-    vector<double> feature_max(30, -DBL_MAX);
-    vector<double> feature_min(30, DBL_MAX);
+    if (!X.empty()) {
+        vector<double> feature_max(X[0].row, -DBL_MAX);
+        vector<double> feature_min(X[0].row, DBL_MAX);
 
-    for (int i = 0; i < X.size(); i++) {
-        for (int j = 0; j < 30; j++) {
-            if (X[i].vec[j] < feature_min[j]) {
-                feature_min[j] = X[i].vec[j];
+        for (int i = 0; i < X.size(); i++) {
+            for (int j = 0; j < X[0].row; j++) {
+                if (X[i].vec[j] < feature_min[j]) {
+                    feature_min[j] = X[i].vec[j];
+                }
+
+                if (X[i].vec[j] > feature_max[j]) {
+                    feature_max[j] = X[i].vec[j];
+                }
             }
+        }
 
-            if (X[i].vec[j] > feature_max[j]) {
-                feature_max[j] = X[i].vec[j];
+        for (int i = 0; i < X.size(); i++) {
+            for (int j = 0; j < X[0].row; j++) {
+                X[i].vec[j] = (X[i].vec[j] - feature_min[j]) / (feature_max[j] - feature_min[j] + 1e-9);
             }
         }
     }
-
-    for (int i = 0; i < X.size(); i++) {
-        for (int j = 0; j < 30; j++) {
-            X[i].vec[j] = (X[i].vec[j] - feature_min[j]) / (feature_max[j] - feature_min[j] + 1e-9);
-        }
-    }
-
 
 }
 

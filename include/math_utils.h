@@ -11,6 +11,9 @@ namespace math_utils {
     double BCE_cost(const matrix& Y, const matrix& A);
     matrix BCE_deriv(const matrix& Y, const matrix& A);
 
+    //matrix softmax();
+    //double categorical_cross_entropy;
+
 }
 
 #endif
