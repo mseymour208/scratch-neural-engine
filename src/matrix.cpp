@@ -95,11 +95,11 @@ ostream& operator<<(ostream& os, const matrix& m) {
 }
 
 double matrix::operator()(int r, int c) const {
-    return vec[r, c];
+    return vec[r * this->col + c];
 }
 
 double& matrix::operator()(int r, int c) {
-    return vec[r, c];
+    return vec[r * this->col + c];
 }
 
 int matrix::get_row() const {

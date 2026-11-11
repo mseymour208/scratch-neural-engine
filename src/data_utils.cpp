@@ -58,7 +58,7 @@ int data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matri
         }
     }
     
-    return X[0].vec.size();
+    return X[0].get_row();
 
 }
 
@@ -110,10 +110,10 @@ void data_utils::MinMaxScaler::fit(const vector<matrix>& data) {
     for (int i = 0; i < data.size(); i++) {
         for (int j = 0; j < num_features; j++) {
             if (data[i](j, 0) < feature_min[j])
-                feature_min[j] = data[i](i, 0);
+                feature_min[j] = data[i](j, 0);
 
             if (data[i](j, 0) > feature_max[j])
-                feature_max[j] = data[i](i, 0);
+                feature_max[j] = data[i](j, 0);
 
         }
     }

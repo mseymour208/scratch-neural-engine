@@ -13,8 +13,7 @@
         // Train/test containers
         vector<matrix> X_train, X_test, Y_train, Y_test;
 
-
-
+        
         // Data loading...
 
         // File path
@@ -92,7 +91,7 @@
         cout << "Training Done" << endl;
         // Testing loop
         double total_bce = 0.0;
-        const double eps = 1e-25;
+        const double eps = 1e-9;
         int count = 0;
 
         for (int i = 0; i < X_test.size(); i++) {
