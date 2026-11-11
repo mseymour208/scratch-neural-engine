@@ -81,7 +81,7 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
 void data_utils::train_test_split(vector<matrix>& X, vector<matrix>& Y, vector<matrix>& X_train, vector<matrix>& X_test,
 vector<matrix>& Y_train, vector<matrix>& Y_test) {
 
-    vector<int> indices(X.size());
+    vector<int> indices;
     for (int i = 0; i < X.size(); i++) {
         indices.push_back(i);
     }
