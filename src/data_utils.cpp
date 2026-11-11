@@ -1,12 +1,12 @@
 #include "data_utils.h"
 #include <unordered_map>
 
-void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx) {
+int data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx) {
     ifstream file(filepath);
 
     if (!file.is_open()) {
         cerr << "Error opening file" << endl;
-        return;
+        exit(1);
     }
 
     unordered_map<string, double> label_map;
@@ -18,7 +18,11 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
     if (has_header) {
         getline(file, row_string);
     }
+
     while (getline(file, row_string)) {
+        if (!row_string.empty() && row_string.back() == '\r')
+            row_string.pop_back();
+        
         vector<double> y_raw;
         vector<double> x_raw;
 
@@ -28,6 +32,8 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
 
         // Iterate over columns
         while (getline(stream, cell_string, ',')) {
+            if (!cell_string.empty() && cell_string.back() == '\r')
+                cell_string.pop_back();
             if (current_col == label_idx) {
 
                 if (label_map.find(cell_string) == label_map.end()) {
@@ -51,29 +57,8 @@ void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matr
             Y.emplace_back(matrix(y_raw.size(), 1, y_raw));
         }
     }
-
-    if (!X.empty()) {
-        vector<double> feature_max(X[0].row, -DBL_MAX);
-        vector<double> feature_min(X[0].row, DBL_MAX);
-
-        for (int i = 0; i < X.size(); i++) {
-            for (int j = 0; j < X[0].row; j++) {
-                if (X[i].vec[j] < feature_min[j]) {
-                    feature_min[j] = X[i].vec[j];
-                }
-
-                if (X[i].vec[j] > feature_max[j]) {
-                    feature_max[j] = X[i].vec[j];
-                }
-            }
-        }
-
-        for (int i = 0; i < X.size(); i++) {
-            for (int j = 0; j < X[0].row; j++) {
-                X[i].vec[j] = (X[i].vec[j] - feature_min[j]) / (feature_max[j] - feature_min[j] + 1e-9);
-            }
-        }
-    }
+    
+    return X[0].vec.size();
 
 }
 
@@ -103,6 +88,52 @@ vector<matrix>& Y_train, vector<matrix>& Y_test) {
             Y_test.push_back(Y[shuffled_idx]);
         }
     }
+}
+
+data_utils::MinMaxScaler::MinMaxScaler() : feature_max(0), feature_min(0) {}
+
+void data_utils::MinMaxScaler::fit(const vector<matrix>& data) {
+
+    if (data.empty()) {
+        cerr << "Error: Data is empty" << endl;
+        exit(1);
+    }
+
+    // Inspect the first matrix for num features
+    int num_features = data[0].get_row();
+
+    // Initialize feature_min with high bounds (DBL_MAX), and feature_max with low (-DBL_MAX)
+    feature_min.assign(num_features, DBL_MAX);
+    feature_max.assign(num_features, -DBL_MAX);
+
+    // Loop through every matrix in data accross all feature rows, updating class member vectors
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < num_features; j++) {
+            if (data[i](j, 0) < feature_min[j])
+                feature_min[j] = data[i](i, 0);
+
+            if (data[i](j, 0) > feature_max[j])
+                feature_max[j] = data[i](i, 0);
+
+        }
+    }
+}
+
+void data_utils::MinMaxScaler::transform(vector<matrix>& data) {
+
+    int num_features = data[0].get_row();
+    for (int i = 0; i < data.size(); i++) {
+        for (int j = 0; j < num_features; j++) {
+            data[i](j, 0) = (data[i](j, 0) - feature_min[j]) / (feature_max[j] - feature_min[j] + 1e-9);
+        }
+    }
+
+
+}
+
+void data_utils::MinMaxScaler::fit_transform(vector<matrix>& data) {
+    fit(data);
+    transform(data);
 }
 
 

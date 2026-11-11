@@ -16,9 +16,8 @@ namespace math_utils {
 }
 
 namespace data_utils {
-    void load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx=-1);
+    int load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx=-1);
 }
-
 
 class matrix {
 
@@ -42,8 +41,11 @@ public:
     matrix operator!() const;
     matrix operator%(const matrix& m) const;
     double operator()(int r, int c) const;
+    double& operator()(int r, int c);
+    int get_row() const;
 
-    friend void data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx);
+    friend int data_utils::load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx);
+
 
     friend matrix math_utils::sigmoid(const matrix& m);
     friend matrix math_utils::sigmoid_deriv(const matrix& m);

@@ -97,3 +97,11 @@ ostream& operator<<(ostream& os, const matrix& m) {
 double matrix::operator()(int r, int c) const {
     return vec[r, c];
 }
+
+double& matrix::operator()(int r, int c) {
+    return vec[r, c];
+}
+
+int matrix::get_row() const {
+    return row;
+}

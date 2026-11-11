@@ -12,9 +12,22 @@
 
 namespace data_utils {
 
-    void load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx);
+    int load_csv(const string& filepath, vector<matrix>& X, vector<matrix>& Y, int label_idx, bool has_header, int id_idx);
     void train_test_split(vector<matrix>& X, vector<matrix>& Y, vector<matrix>& X_train, vector<matrix>& X_test, vector<matrix>& Y_train, vector<matrix>& Y_test);
-}
 
+
+    class MinMaxScaler {
+
+        private:
+            vector<double> feature_min;
+            vector<double> feature_max;
+        public:
+            MinMaxScaler();
+            void fit(const vector<matrix>& data);
+            void transform(vector<matrix>& data);
+            void fit_transform(vector<matrix>& data);
+
+    };
+}
 
 #endif

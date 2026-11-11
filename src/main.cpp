@@ -57,7 +57,7 @@
         cin >> id_idx;
 
 
-        data_utils::load_csv(full_path.string(), X, Y, label_idx, has_header, id_idx);
+        int num_features = data_utils::load_csv(full_path.string(), X, Y, label_idx, has_header, id_idx);
 
         // Breast Cancer dataset n = 569, 97.3684
         //data_utils::load_csv("C:\\Users\\Mikle\\OneDrive\\Desktop\\scratch-neural-engine\\DATA\\wdbc.data", X, Y, 1, false, 0);
@@ -75,16 +75,21 @@
         // Splitting data
         data_utils::train_test_split(X, Y, X_train, X_test, Y_train, Y_test);
 
+        // Fit and transform our training data
+        data_utils::MinMaxScaler scaler;
+        scaler.fit_transform(X_train);
+        scaler.transform(X_test);
+
         // Creating network
         network neural_net(0.1); // Learning rate 0.1
-        neural_net.add_layer(4, 16); // Hidden Layer
+        neural_net.add_layer(num_features, 16); // Hidden Layer
         neural_net.add_layer(16, 1); // Output Layer
 
 
         // Train call
         neural_net.train(X_train, Y_train, 1000);
 
-
+        cout << "Training Done" << endl;
         // Testing loop
         double total_bce = 0.0;
         const double eps = 1e-25;
@@ -104,6 +109,7 @@
             total_bce += -(y_true * log(p) + (1.0 - y_true) * log(1.0 - p));
 
         }
+
 
         double accuracy = (count * 100.0) / X_test.size();
         double test_bce = total_bce / X_test.size();
